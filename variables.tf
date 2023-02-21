@@ -6,10 +6,12 @@ variable "aws_region" {
 }
 
 variable "cidr_addr_range" {
-    type = string  
+    type = string
+    default = "172.16.0.0/16"
 }
 
 variable "input_vpc_name" {
   type = string
+  default = "myDemoVPC"
   description = "Set the name of the VPC"
 }
