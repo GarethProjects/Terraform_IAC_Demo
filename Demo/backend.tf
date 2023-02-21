@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = "gl-back-end-tf-statefile-2010"
+    bucket = "demo-bucket-terraform1000"
     key = "terraform/tfstate.tfstate"
-    region = "us-east-2"
+    region = "us-east-1"
     dynamodb_table = "terraform-state-backend-table"
   }
 }
