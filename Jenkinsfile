@@ -1,11 +1,18 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_DEFAULT_REGION="us-east-2"
+        THE_BUTLER_SAYS_SO=credentials('demo-aws')
     }
-    
-    stages {   
+    stages {
+        stage ("Creds") {
+            steps {
+                sh '''
+          aws --version
+          aws ec2 describe-instances
+        '''
+            }
+        }
         stage ("terraform init") {
             steps {
                 sh ("terraform init -reconfigure") 
@@ -33,9 +40,8 @@ pipeline {
         stage (" Action") {
             steps {
                 echo "Terraform action is --> ${action}"
-                sh ('terraform ${action} --auto-approve -var-file="dev.tfvars"')
+                sh ('terraform ${action} --auto-approve -var-file="test.tfvars"')
            }
         }
     }
 }
-
