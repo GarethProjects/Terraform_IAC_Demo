@@ -1,6 +1,17 @@
 pipeline {
     agent any
-
+    environment {
+    AWS_DEFAULT_REGION="us-east-2"
+  }
+  stages {
+    stage('Hello') {
+      steps {
+        withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'demo-aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+          sh '''
+            aws --version
+            aws ec2 describe-instances
+          '''
+        }
     stages {        
         stage ("terraform init") {
             steps {
