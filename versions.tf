@@ -10,5 +10,6 @@ terraform {
 
 # Provider Block
 provider "aws" {
-   region  = var.aws_region
+  profile = "arn:aws:iam::160359286381:instance-profile/JenkinsTerraformExecutionRole"
+  region  = var.aws_region
 }
