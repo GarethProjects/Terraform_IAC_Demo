@@ -1,15 +1,11 @@
 pipeline {
     agent any
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
+    
     stages {   
-        stage ("AWS-Creds") {
-            steps {
-                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'demo-aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                sh '''
-                aws --version
-                 aws ec2 describe-instances
-                '''
-            }
-        }     
         stage ("terraform init") {
             steps {
                 sh ("terraform init -reconfigure") 
