@@ -1,12 +1,7 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/GarethProjects/Terraform_IAC_Demo.git']])
-            }
-        }
+    stages {        
         stage ("terraform init") {
             steps {
                 sh ("terraform init -reconfigure") 
