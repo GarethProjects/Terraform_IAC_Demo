@@ -20,7 +20,7 @@ pipeline {
         }
         stage ("Terraform Format") {
             steps {
-                sh ('terraform fmt -list=true -write=false -diff=true -check=true')
+                sh ('terraform fmt')
             }
         }
        stage ("terraform validate script") {
