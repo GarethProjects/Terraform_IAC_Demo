@@ -18,6 +18,11 @@ pipeline {
                 sh ("terraform init -reconfigure") 
             }
         }
+        stage ("Terraform Format") {
+            steps {
+                sh ('terraform fmt -list=true -write=false -diff=true -check=true')
+            }
+        }
        stage ("terraform validate script") {
             steps {
                 sh ('terraform validate') 
@@ -25,7 +30,8 @@ pipeline {
         }
         stage ("plan") {
             steps {
-                sh ('terraform plan') 
+                sh ('terraform plan')
+                sh ('terraform plan -out myplan')
             }
         }
         stage ("Validate apply") {
