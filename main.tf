@@ -105,23 +105,23 @@ resource "aws_instance" "my-ec2-vm" {
 # 4 changes in git now automatically trigger the workflow shown in our diagram
 
 # # Resource-9: Create Subnet after original IAC code has been built
-# resource "aws_subnet" "vpc-dev-public-subnetdayN-2" {
-#   vpc_id                  = aws_vpc.vpc-dev.id
-#   cidr_block              = "172.16.2.0/24"
-#   availability_zone       = "us-east-1a"
-#   map_public_ip_on_launch = false
-# }
+resource "aws_subnet" "vpc-dev-public-subnetdayN-2" {
+  vpc_id                  = aws_vpc.vpc-dev.id
+  cidr_block              = "172.16.2.0/24"
+  availability_zone       = "us-east-1a"
+  map_public_ip_on_launch = false
+}
 
 # # Resource-10: Create Route Table
-# resource "aws_route_table" "vpc-dev-new-private-route-table" {
-#   vpc_id = aws_vpc.vpc-dev.id
-# }
+resource "aws_route_table" "vpc-dev-new-private-route-table" {
+  vpc_id = aws_vpc.vpc-dev.id
+}
 
 # # Resource-11: Associate the Route Table with the new Subnet
-# resource "aws_route_table_association" "vpc-dev-private-route-table-associate" {
-#   route_table_id = aws_route_table.vpc-dev-new-private-route-table.id
-#   subnet_id      = aws_subnet.vpc-dev-public-subnetdayN-2.id
-# }
+resource "aws_route_table_association" "vpc-dev-private-route-table-associate" {
+  route_table_id = aws_route_table.vpc-dev-new-private-route-table.id
+  subnet_id      = aws_subnet.vpc-dev-public-subnetdayN-2.id
+}
 
 
 
