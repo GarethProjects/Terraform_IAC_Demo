@@ -42,11 +42,11 @@ pipeline {
 //                 echo "Apply command has been accepted"
 //             }
 //         }
-        stage ("Action") {
-            steps {
-                echo "Terraform action is --> ${action}"
-                sh ('terraform ${action} --auto-approve')
-           }
-        }
+//         stage ("Action") {
+//             steps {
+//                 echo "Terraform action is --> ${action}"
+//                 sh ('terraform ${action} --auto-approve')
+//            }
+//         }
     }
 }
