@@ -30,18 +30,18 @@ pipeline {
         }
         stage ("plan") {
             steps {
-                sh ('terraform plan -out myplan')
+                sh ('terraform plan')
             }
         }
-        stage ("Validate apply") {
-            input {
-                message "Are you sure you want to apply this plan?"
-                ok "Apply this plan."
-            }
-            steps{
-                echo "Apply command has been accepted"
-            }
-        }
+//         stage ("Validate apply") {
+//             input {
+//                 message "Are you sure you want to apply this plan?"
+//                 ok "Apply this plan."
+//             }
+//             steps{
+//                 echo "Apply command has been accepted"
+//             }
+//         }
         stage (" Action") {
             steps {
                 echo "Terraform action is --> ${action}"
