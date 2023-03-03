@@ -18,7 +18,7 @@ pipeline {
                 sh ("terraform init -reconfigure") 
             }
         }
-        stage ("terraform Format") {
+        stage ("Terraform Format") {
             steps {
                 sh ('terraform fmt')
             }
@@ -30,7 +30,7 @@ pipeline {
         }
         stage ("plan") {
             steps {
-                sh ('terraform apply')
+                sh ('terraform plan -out myplan')
             }
         }
         stage ("Validate apply") {
@@ -42,7 +42,7 @@ pipeline {
                 echo "Apply command has been accepted"
             }
         }
-        stage ("Action") {
+        stage (" Action") {
             steps {
                 echo "Terraform action is --> ${action}"
                 sh ('terraform ${action} --auto-approve')
