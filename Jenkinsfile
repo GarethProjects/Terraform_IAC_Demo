@@ -28,11 +28,11 @@ pipeline {
 //                 sh ('terraform validate') 
 //             }
 //         }
-//         stage ("plan") {
-//             steps {
-//                 sh ('terraform plan')
-//             }
-//         }
+        stage ("plan") {
+            steps {
+                sh ('terraform plan -destroy')
+            }
+        }
 //         stage ("Validate apply") {
 //             input {
 //                 message "Are you sure you want to apply this plan?"
