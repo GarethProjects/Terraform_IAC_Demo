@@ -18,35 +18,35 @@ pipeline {
                 sh ("terraform init -reconfigure") 
             }
         }
-        stage ("Terraform Format") {
+        stage ("terraform Format") {
             steps {
                 sh ('terraform fmt')
             }
         }
-//        stage ("terraform validate script") {
-//             steps {
-//                 sh ('terraform validate') 
-//             }
-//         }
+       stage ("terraform validate script") {
+            steps {
+                sh ('terraform validate') 
+            }
+        }
         stage ("plan") {
             steps {
                 sh ('terraform apply')
             }
         }
-//         stage ("Validate apply") {
-//             input {
-//                 message "Are you sure you want to apply this plan?"
-//                 ok "Apply this plan."
-//             }
-//             steps{
-//                 echo "Apply command has been accepted"
-//             }
-//         }
-//         stage ("Action") {
-//             steps {
-//                 echo "Terraform action is --> ${action}"
-//                 sh ('terraform ${action} -auto-approve')
-//            }
-//         }
+        stage ("Validate apply") {
+            input {
+                message "Are you sure you want to apply this plan?"
+                ok "Apply this plan."
+            }
+            steps{
+                echo "Apply command has been accepted"
+            }
+        }
+        stage ("Action") {
+            steps {
+                echo "Terraform action is --> ${action}"
+                sh ('terraform ${action} --auto-approve')
+           }
+        }
     }
 }
