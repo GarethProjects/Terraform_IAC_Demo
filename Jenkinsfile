@@ -28,11 +28,11 @@ pipeline {
 //                 sh ('terraform validate') 
 //             }
 //         }
-        stage ("plan") {
-            steps {
-                sh ('terraform plan')
-            }
-        }
+//         stage ("plan") {
+//             steps {
+//                 sh ('terraform plan')
+//             }
+//         }
 //         stage ("Validate apply") {
 //             input {
 //                 message "Are you sure you want to apply this plan?"
@@ -42,7 +42,7 @@ pipeline {
 //                 echo "Apply command has been accepted"
 //             }
 //         }
-        stage (" Action") {
+        stage ("Action") {
             steps {
                 echo "Terraform action is --> ${action}"
                 sh ('terraform ${action} --auto-approve')
