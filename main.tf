@@ -88,13 +88,12 @@ resource "aws_instance" "my-ec2-vm" {
     sudo yum install httpd -y
     sudo systemctl enable httpd
     sudo systemctl start httpd
-    echo "This is just to demo the script" > /var/www/html/index.html
+    echo "This is just to demo the script for testing" > /var/www/html/index.html
     EOF
   tags = {
     "Name" = "myec2vm"
   }    
 }
-
 
 
 # # Resource-10: Create Subnet after original IAC code has been built
