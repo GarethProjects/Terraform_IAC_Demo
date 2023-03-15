@@ -5,7 +5,7 @@
 
 # Resources Block
 # Resource-1: Create VPC
-resource "aws_vpc" "vpc-dev" {
+resource "aws_vpc" "vpc-dev-demopipeline" {
   cidr_block = var.cidr_addr_range
   tags = {
     "Name" = var.input_vpc_name
@@ -14,7 +14,7 @@ resource "aws_vpc" "vpc-dev" {
 
 # Resource-2: Create Subnet
 resource "aws_subnet" "vpc-dev-public-subnet-1" {
-  vpc_id                  = aws_vpc.vpc-dev.id
+  vpc_id                  = aws_vpc.vpc-dev-demopipeline.id
   cidr_block              = "172.16.1.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
@@ -22,12 +22,12 @@ resource "aws_subnet" "vpc-dev-public-subnet-1" {
 
 # Resource-3: Internet Gateway
 resource "aws_internet_gateway" "vpc-dev-igw" {
-  vpc_id = aws_vpc.vpc-dev.id
+  vpc_id = aws_vpc.vpc-dev-demopipeline.id
 }
 
 # Resource-4: Create Route Table
 resource "aws_route_table" "vpc-dev-public-route-table" {
-  vpc_id = aws_vpc.vpc-dev.id
+  vpc_id = aws_vpc.vpc-dev-demopipeline.id
 }
 
 # Resource-5: Create Route in Route Table for Internet Access
@@ -47,7 +47,7 @@ resource "aws_route_table_association" "vpc-dev-public-route-table-associate" {
 resource "aws_security_group" "dev-vpc-sg" {
   name        = "dev-vpc-default-sg"
   description = "Dev VPC Default Security Group"
-  vpc_id      = aws_vpc.vpc-dev.id
+  vpc_id      = aws_vpc.vpc-dev-demopipeline.id
 
   ingress {
     description = "Allow Port 22"
@@ -99,7 +99,7 @@ resource "aws_instance" "my-ec2-vm" {
 
 # Resource-10: Create Subnet after original IAC code has been built
 resource "aws_subnet" "vpc-dev-public-subnetdayN-2" {
-  vpc_id                  = aws_vpc.vpc-dev.id
+  vpc_id                  = aws_vpc.vpc-dev-demopipeline.id
   cidr_block              = "172.16.2.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = false
