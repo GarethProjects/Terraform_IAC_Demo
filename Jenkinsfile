@@ -18,6 +18,11 @@ pipeline {
                 sh ("terraform init -reconfigure") 
             }
         }
+        stage ("Terraform Format") {
+            steps {
+                sh ('terraform fmt')
+            }
+        }
        stage ("terraform validate script") {
             steps {
                 sh ('terraform validate') 
@@ -25,7 +30,7 @@ pipeline {
         }
         stage ("plan") {
             steps {
-                sh ('terraform plan') 
+                sh ('terraform plan -out myplan')
             }
         }
         stage ("Validate apply") {
@@ -40,7 +45,7 @@ pipeline {
         stage (" Action") {
             steps {
                 echo "Terraform action is --> ${action}"
-                sh ('terraform ${action} --auto-approve -var-file="test.tfvars"')
+                sh ('terraform ${action} --auto-approve')
            }
         }
     }
