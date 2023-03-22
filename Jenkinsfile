@@ -28,6 +28,13 @@ pipeline {
                 sh ('terraform validate') 
             }
         }
+        
+        stage ("state list") {
+            steps {
+                sh ('terraform state list')
+            }
+        }
+        
         stage ("plan") {
             steps {
                 sh ('terraform plan -out myplan')
@@ -47,6 +54,11 @@ pipeline {
                 echo "Terraform action is --> ${action}"
                 sh ('terraform ${action} --auto-approve')
            }
+        }
+        stage ("state list review") {
+            steps {
+                sh ('terraform state list')
+            }
         }
     }
 }
