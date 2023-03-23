@@ -15,3 +15,7 @@ variable "input_vpc_name" {
   default = "myDemoVPC"
   description = "Set the name of the VPC"
 }
+
+variable "state_file" {
+  description = "Path to the statefile"
+}
