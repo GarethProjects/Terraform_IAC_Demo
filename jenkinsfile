@@ -31,7 +31,7 @@ pipeline {
             steps {
                 sh '''
                     aws --version
-                    aws ec2 describe-route-tables --route-table-ids rtb-057559b8a0beebf1b > current-routes.json
+                    aws ec2 describe-route-tables --route-table-ids rtb-0232d108657be4a79 > current-routes.json
                 '''
             }
         }
