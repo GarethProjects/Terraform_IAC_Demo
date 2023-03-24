@@ -44,9 +44,7 @@ pipeline {
                     script {
                         // Run the subsequent stages for each repo
                         def repos = [
-                            [name: 'Repo 1', stateFile: 's3://demo-bucket-terraform1000/terraformDemoDay0/tfstate.tfstate'],
-                            [name: 'Repo 2', stateFile: 's3://demo-bucket-terraform1000/terraformDemoDayN_Drift/tfstate.tfstate'],
-                            [name: 'Repo 3', stateFile: 's3://demo-bucket-terraform1000/terraformDemoDay0_deleteDemo/tfstate.tfstate']
+                            [name: 'Repo 1', stateFile: 's3://demo-bucket-terraform1000/terraformDemoDay0/tfstate.tfstate']
                         ]
                         for (repo in repos) {
                             echo "Running 'terraform plan' for ${repo.name}..."
