@@ -35,9 +35,9 @@ pipeline {
             }
         }
         
-        stage ("plan") {
+       stage ("plan") {
             steps {
-                sh ('terraform plan -out myplan')
+                sh ('terraform plan -var-file=myvars.tfvars -out myplan')
             }
         }
         stage ("Validate apply") {
