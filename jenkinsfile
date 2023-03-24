@@ -1,24 +1,12 @@
 pipeline {
     agent any
-    parameters {
-        booleanParam(
-            name: 'detectDrift',
-            defaultValue: true,
-            description: 'Set to true to detect configuration drift'
-        )
-    }
+    
     environment {
         AWS_DEFAULT_REGION="us-east-2"
         THE_BUTLER_SAYS_SO=credentials('aws-creds')
     }
-    stages {
-
+   stages {
         stage('Detect Configuration Drift') {
-            when {
-                expression {
-                    params.detectDrift == true
-                }
-            }
             steps {
                 sh '''
                     terraform init
@@ -28,13 +16,13 @@ pipeline {
                     def exitCode = sh(
                         returnStatus: true,
                         script: 'echo $?'
-                    ).trim().toInteger()
+                    )
                     if (exitCode == 2) {
-                        echo "There are changes detected. Run 'terraform apply' to update the infrastructure."
+                        error "Configuration drift detected! Run 'terraform apply' to update the infrastructure."
                     } else if (exitCode == 1) {
                         error "There was an error running 'terraform plan'. Check the logs for details."
                     } else {
-                        echo "No changes detected."
+                        echo "No configuration drift detected."
                     }
                 }
             }
