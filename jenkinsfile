@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        AWS_DEFAULT_REGION="us-east-2"
+        AWS_DEFAULT_REGION="us-east-1"
         THE_BUTLER_SAYS_SO=credentials('aws-creds')
     }
    stages {
