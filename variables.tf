@@ -16,6 +16,6 @@ variable "input_vpc_name" {
   description = "Set the name of the VPC"
 }
 
-variable "state_file" {
+variable "stateFile" {
   description = "Path to the statefile"
 }
