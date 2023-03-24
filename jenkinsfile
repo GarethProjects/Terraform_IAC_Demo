@@ -5,8 +5,7 @@ pipeline {
         AWS_DEFAULT_REGION="us-east-1"
         THE_BUTLER_SAYS_SO=credentials('aws-creds')
     }
-
-    stages {
+   stages {
         stage('Detect Configuration Drift') {
             steps {
                 sh '''
@@ -28,21 +27,11 @@ pipeline {
                 }
             }
         }
-
-        stage("Check for Changes in Route Table") {
+        stage ("Creds") {
             steps {
                 sh '''
-                    # Get current routes and save them to a file
-                    aws ec2 describe-route-tables --route-table-ids rtb-0232d108657be4a79 > current-routes.json
-
-                    # Compare current routes to previous routes
-                    if ! cmp -s current-routes.json previous-routes.json; then
-                        echo "Changes detected in AWS route table. Run 'terraform apply' to update the infrastructure."
-                        exit 1
-                    fi
-
-                    # Save current routes to previous-routes.json for next run
-                    cp current-routes.json previous-routes.json
+                    aws --version
+                    aws ec2 describe-route-tables --route-table-ids rtb-0232d108657be4a79 
                 '''
             }
         }
